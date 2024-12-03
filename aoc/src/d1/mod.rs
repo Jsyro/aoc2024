@@ -17,7 +17,7 @@ pub mod day1 {
         for i in 0..left.len() {
             total_diff += left[i].abs_diff(right[i]);
         }
-        println!("Day1: Part1= {}", total_diff);
+        println!("Day 1, Part 1. total_diff={}", total_diff);
 
         //Part 2
         let mut total_similarity_score: u32 = 0;
@@ -25,6 +25,10 @@ pub mod day1 {
             total_similarity_score +=
                 left[i] * right.iter().filter(|&n| *n == left[i]).count() as u32;
         }
-        println!("Day1: Part2= {}", total_similarity_score);
+        println!(
+            "Day 1, Part 2. total_similarity_score={}",
+            total_similarity_score
+        );
+        println!("");
     }
 }
