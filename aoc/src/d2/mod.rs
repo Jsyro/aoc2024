@@ -1,4 +1,5 @@
 pub mod day2 {
+
     pub fn run(lines: Vec<String>) {
         let mut num_safe_reports: i32 = 0;
         let mut num_unsafe_reports: i32 = 0;

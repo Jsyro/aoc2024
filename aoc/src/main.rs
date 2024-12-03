@@ -1,6 +1,8 @@
+use std::env;
 use std::fs::read_to_string;
 mod d1;
 mod d2;
+mod d3;
 
 fn main() {
     fn read_lines(filename: &str) -> Vec<String> {
@@ -11,7 +13,14 @@ fn main() {
             .collect() // gather them together into a vector
     }
 
-    println!("Hello, world!");
-    d1::day1::run(read_lines("d1/input.txt"));
-    d2::day2::run(read_lines("d2/input.txt"));
+    fn current_dir() -> std::io::Result<()> {
+        let path = env::current_dir()?;
+        println!("The current directory is {}", path.display());
+        Ok(())
+    }
+
+    let _ = current_dir();
+    d1::day1::run(read_lines("src/d1/input.txt"));
+    d2::day2::run(read_lines("src/d2/input.txt"));
+    d3::day3::run(read_lines("src/d3/input.txt"));
 }
