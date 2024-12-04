@@ -31,7 +31,7 @@ pub mod day3 {
                 //first subsegments are ignored, everything after another do is valid
                 let _ = all_sub_segments.remove(0);
 
-                println!("{:?}", all_sub_segments);
+                // println!("{:?}", all_sub_segments);
 
                 valid_segments.append(&mut all_sub_segments);
             }
@@ -41,7 +41,7 @@ pub mod day3 {
             for (_, [v1, v2]) in result_iter.map(|pair| pair.extract()) {
                 let i1: i32 = v1.parse().unwrap();
                 let i2: i32 = v2.parse().unwrap();
-                println!("{}*{}", i1, i2);
+                // println!("{}*{}", i1, i2);
                 p2_result += i1 * i2;
             }
         }
