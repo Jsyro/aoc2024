@@ -45,7 +45,7 @@ pub mod day3 {
                 p2_result += i1 * i2;
             }
         }
-        println!("Day 3, Part 2. result= {}", p2_result);
+        println!("Day 3, Part 2. WRONG result= {}", p2_result);
 
         println!("");
     }

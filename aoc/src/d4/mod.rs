@@ -70,12 +70,12 @@ pub mod day4 {
                         substring.push(char_map[pos[3][0]][pos[3][1]]);
                         // println!("dir_vector={:?}{:?}", dir, substring);
                         if substring == "XMAS" {
-                            println!(
-                                "Found {} at pos{:?} in direction {:?}",
-                                substring,
-                                [y, x],
-                                dir
-                            );
+                            // println!(
+                            //     "Found {} at pos{:?} in direction {:?}",
+                            //     substring,
+                            //     [y, x],
+                            //     dir
+                            // );
                             result += 1;
                         }
                     }
