@@ -4,6 +4,7 @@ mod d1;
 mod d2;
 mod d3;
 mod d4;
+mod d5;
 
 fn main() {
     fn read_lines(filename: &str) -> Vec<String> {
@@ -25,4 +26,5 @@ fn main() {
     d2::day2::run(read_lines("src/d2/input.txt"));
     d3::day3::run(read_lines("src/d3/input.txt"));
     d4::day4::run(read_lines("src/d4/input.txt"));
+    d5::day5::run(read_lines("src/d5/input.txt"));
 }
