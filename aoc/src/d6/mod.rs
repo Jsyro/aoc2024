@@ -36,11 +36,11 @@ pub mod day6 {
             }
 
             let char_ahead = char_map[next_y_pos as usize][next_x_pos as usize];
-            println!(
-                "looking at {} at {:?}",
-                char_ahead,
-                [next_y_pos, next_x_pos]
-            );
+            // println!(
+            //     "looking at {} at {:?}",
+            //     char_ahead,
+            //     [next_y_pos, next_x_pos]
+            // );
 
             if char_ahead == '#' {
                 //obstacle, turn right
