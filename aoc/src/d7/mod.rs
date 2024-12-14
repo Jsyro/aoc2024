@@ -1,4 +1,6 @@
 pub mod day7 {
+    use core::num;
+
     use itertools::Itertools;
 
     pub fn run(lines: Vec<String>) {
@@ -16,10 +18,13 @@ pub mod day7 {
                 .map(|x| x.parse::<u64>().unwrap())
                 .collect();
 
-            println!("value={},operands={:?}", test_value, operands);
-
             //false is mulitply, true is add
-            for num_multiply in 0..operands.len() - 1 {
+            let mut answer_found = false;
+            for num_multiply in 0..operands.len() {
+                if answer_found {
+                    continue;
+                }
+
                 let mut multiplication_positions: Vec<Vec<usize>> = (0..(operands.len() - 1))
                     .combinations(num_multiply)
                     .collect();
@@ -44,10 +49,11 @@ pub mod day7 {
 
                     if eval_result == test_value {
                         result += eval_result as u64;
-                        println!(
-                            "found a permutation that matches.{:?},{:?}",
-                            curr_operators, operands
-                        );
+                        // println!(
+                        //     "found a permutation that matches.{:?},{:?}",
+                        //     curr_operators, operands
+                        // );
+                        answer_found = true;
                         break;
                     }
                 }
