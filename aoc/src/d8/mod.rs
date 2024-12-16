@@ -8,7 +8,7 @@ pub mod day8 {
 
         let mut antennas: HashMap<char, Vec<[usize; 2]>> = Default::default();
         let mut anitnodes: Vec<[i32; 2]> = Default::default();
-        let char_map: Vec<Vec<char>> = lines.iter().map(|l| l.chars().collect()).collect();
+        let mut char_map: Vec<Vec<char>> = lines.iter().map(|l| l.chars().collect()).collect();
 
         for y in 0..lines.len() {
             for x in 0..lines[y].len() {
@@ -29,13 +29,13 @@ pub mod day8 {
 
         println!("Antennas Found, {:?}", antennas);
 
-        for (_signal, tower_pos_list) in antennas.iter().clone() {
+        for (signal, tower_pos_list) in antennas.iter().clone() {
             for t in tower_pos_list.into_iter().combinations(2) {
                 let t1_pos: [usize; 2] = *t[0];
                 let t2_pos: [usize; 2] = *t[1];
 
                 let diff_vec: [i32; 2] = [
-                    (t2_pos[0] as i32 - t1_pos[1] as i32),
+                    (t2_pos[0] as i32 - t1_pos[0] as i32),
                     (t2_pos[1] as i32 - t1_pos[1] as i32),
                 ];
 
@@ -54,22 +54,26 @@ pub mod day8 {
                         //an1_y out of range
                         continue;
                     }
-                    if an_pos[1] < 0 || an_pos[0] >= lines[0].len() as i32 {
+                    if an_pos[1] < 0 || an_pos[1] >= lines[0].len() as i32 {
                         //an1_x out of range
                         continue;
                     }
 
                     if !anitnodes.contains(&an_pos) {
-                        // println!("New Antinode at {:?} with freq {}", an_pos, signal);
+                        println!("New Antinode at {:?} with freq {}", an_pos, signal);
                         anitnodes.push(an_pos);
                         result += 1;
+                        char_map[an_pos[0] as usize][an_pos[1] as usize] = '#';
                     } else {
+                        println!("Antinode position already found, {:?}", an_pos);
                     }
                 }
             }
         }
-
-        println!("Day 8, Part 1. bad_result= {}", result);
+        for row in char_map {
+            println!("{:?}", row);
+        }
+        println!("Day 8, Part 1. result= {}", result);
         println!("Day 8, Part 2. bad_result= {}", p2_result);
 
         println!("");
