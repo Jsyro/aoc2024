@@ -1,6 +1,4 @@
 pub mod day7 {
-    use core::num;
-
     use itertools::Itertools;
 
     pub fn run(lines: Vec<String>) {
@@ -25,13 +23,13 @@ pub mod day7 {
                     continue;
                 }
 
-                let mut multiplication_positions: Vec<Vec<usize>> = (0..(operands.len() - 1))
+                let multiplication_positions: Vec<Vec<usize>> = (0..(operands.len() - 1))
                     .combinations(num_multiply)
                     .collect();
 
-                for mul_pos in multiplication_positions {
+                for pa_mul_pos in multiplication_positions {
                     let mut curr_operators: Vec<bool> = [false].repeat(operands.len() - 1);
-                    for mp in mul_pos {
+                    for mp in pa_mul_pos {
                         curr_operators[mp] = true;
                     }
                     let mut eval_result = operands[0];

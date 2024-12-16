@@ -38,7 +38,7 @@ pub mod day5 {
             .collect();
         // println!("{}", updates.len());
 
-        for (update_line_num, page_update) in updates.iter().enumerate() {
+        for (_update_line_num, page_update) in updates.iter().enumerate() {
             let middle_value = page_update[page_update.len() / 2];
 
             let mut p1_report_good_ind = true;
@@ -60,7 +60,7 @@ pub mod day5 {
                 if !intersect.is_empty() {
                     // println!(
                     //     "{} is a bad report, page_num {} at index {} has contray rules ={:?}",
-                    //     update_line_num, page_num, index, intersect
+                    //     _update_line_num, page_num, index, intersect
                     // );
                     p1_report_good_ind = false;
 
@@ -68,7 +68,7 @@ pub mod day5 {
 
                     // println!(
                     //     "Report # {} Going to swap report {} in position {} with position {}",
-                    //     update_line_num, page_num, index, previous_pages[0].0
+                    //     _update_line_num, page_num, index, previous_pages[0].0
                     // );
                     let mut p2_update_copy: Vec<&usize> = page_update.iter().clone().collect();
                     p2_update_copy.swap(index, previous_pages[0].0);
