@@ -38,15 +38,17 @@ pub mod day8 {
                     (t2_pos[0] as i32 - t1_pos[0] as i32),
                     (t2_pos[1] as i32 - t1_pos[1] as i32),
                 ];
+                println!("diff_vec={:?}", diff_vec);
 
+                //previous
                 let an1_pos: [i32; 2] = [
-                    t2_pos[0] as i32 + diff_vec[0],
-                    t2_pos[1] as i32 + diff_vec[1],
-                ];
-
-                let an2_pos: [i32; 2] = [
                     t1_pos[0] as i32 - diff_vec[0],
                     t1_pos[1] as i32 - diff_vec[1],
+                ];
+                //next
+                let an2_pos: [i32; 2] = [
+                    t2_pos[0] as i32 + diff_vec[0],
+                    t2_pos[1] as i32 + diff_vec[1],
                 ];
 
                 for an_pos in [an1_pos, an2_pos] {
@@ -68,6 +70,52 @@ pub mod day8 {
                         println!("Antinode position already found, {:?}", an_pos);
                     }
                 }
+                // //p2
+                // anitnodes = vec![];
+                // let mut n = 1;
+                // loop {
+                //     let an_pos = [
+                //         t2_pos[0] as i32 + diff_vec[0] * n,
+                //         t2_pos[1] as i32 + diff_vec[1] * n,
+                //     ];
+                //     let an_neg = [
+                //         t1_pos[0] as i32 - diff_vec[0] * n,
+                //         t1_pos[1] as i32 - diff_vec[1] * n,
+                //     ];
+                //     let an_pair = [an_pos, an_neg];
+                //     let valid_an: Vec<_> = an_pair
+                //         .iter()
+                //         .filter(|an| {
+                //             if an[0] < 0 || an[0] >= lines.len() as i32 {
+                //                 //an1_y out of range
+                //                 return false;
+                //             }
+                //             if an[1] < 0 || an[1] >= lines[0].len() as i32 {
+                //                 //an1_x out of range
+                //                 return false;
+                //             }
+                //             return true;
+                //         })
+                //         .collect();
+
+                //     if valid_an.is_empty() {
+                //         break;
+                //     } else {
+                //         // for p in valid_an.iter().clone() {
+                //         //     char_map[p[0] as usize][p[1] as usize] = '#';
+                //         // }
+                //         for p in valid_an.iter().clone() {
+                //             if !anitnodes.contains(p) {
+                //                 anitnodes.push(**p);
+                //                 p2_result += 1;
+                //             } else {
+                //                 //non unique location
+                //                 continue;
+                //             }
+                //         }
+                //     }
+                //     n += 1;
+                // }
             }
         }
         for row in char_map {
