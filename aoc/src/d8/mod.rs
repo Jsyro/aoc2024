@@ -63,12 +63,12 @@ pub mod day8 {
                     }
 
                     if !anitnodes.contains(&an_pos) {
-                        println!("New Antinode at {:?} with freq {}", an_pos, signal);
+                        // println!("New Antinode at {:?} with freq {}", an_pos, signal);
                         anitnodes.push(an_pos);
                         result += 1;
                         char_map[an_pos[0] as usize][an_pos[1] as usize] = '#';
                     } else {
-                        println!("Antinode position already found, {:?}", an_pos);
+                        // println!("Antinode position already found, {:?}", an_pos);
                     }
                 }
                 //p2
@@ -118,20 +118,12 @@ pub mod day8 {
                 }
             }
         }
-        for row in char_map.iter_mut() {
-            println!("{:?}", row);
-        }
-
-        let p22_result = char_map
-            .clone()
-            .iter()
-            .flatten()
-            .filter(|x| **x == '#')
-            .count() as u64;
+        // for row in char_map.iter_mut() {
+        //     println!("{:?}", row);
+        // }
 
         println!("Day 8, Part 1. result= {}", result);
-        println!("Day 8, Part 2. bad_result= {}", p2_result);
-        println!("Day 8, Part 2. count_result= {}", p22_result);
+        println!("Day 8, Part 2. result= {}", p2_result);
 
         println!("");
     }

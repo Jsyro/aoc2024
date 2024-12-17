@@ -8,6 +8,7 @@ mod d5;
 mod d6;
 mod d7;
 mod d8;
+mod d9;
 
 fn main() {
     fn read_lines(filename: &str) -> Vec<String> {
@@ -33,4 +34,5 @@ fn main() {
     d6::day6::run(read_lines("src/d6/input.txt"));
     d7::day7::run(read_lines("src/d7/input.txt"));
     d8::day8::run(read_lines("src/d8/input.txt"));
+    d9::day9::run(read_lines("src/d9/input.txt"));
 }
