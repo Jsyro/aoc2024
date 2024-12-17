@@ -21,7 +21,7 @@ fn calculate_trailhead_values(map: &Vec<Vec<u8>>, pos: [usize; 2]) -> (u64, u64)
 }
 
 fn valid_next_steps(map: &Vec<Vec<u8>>, pos: [usize; 2], val: u8) -> Vec<[usize; 2]> {
-    println!("at {:?}={}", pos, val);
+    // println!("at {:?}={}", pos, val);
     if val == 9 {
         return vec![pos];
     }
