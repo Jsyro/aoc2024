@@ -28,7 +28,7 @@ pub mod day8 {
             }
         }
 
-        println!("Antennas Found, {:?}", antennas);
+        // println!("Antennas Found, {:?}", antennas);
 
         for (signal, tower_pos_list) in antennas.iter().clone() {
             for t in tower_pos_list.into_iter().combinations(2) {
@@ -39,7 +39,7 @@ pub mod day8 {
                     (t2_pos[0] as i32 - t1_pos[0] as i32),
                     (t2_pos[1] as i32 - t1_pos[1] as i32),
                 ];
-                println!("diff_vec={:?}", diff_vec);
+                // println!("diff_vec={:?}", diff_vec);
 
                 //previous
                 let an1_pos: [i32; 2] = [
