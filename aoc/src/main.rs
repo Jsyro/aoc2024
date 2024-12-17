@@ -27,14 +27,14 @@ fn main() {
     }
 
     let _ = current_dir();
-    d1::day1::run(read_lines("src/d1/input.txt"));
-    d2::day2::run(read_lines("src/d2/input.txt"));
-    d3::day3::run(read_lines("src/d3/input.txt"));
-    d4::day4::run(read_lines("src/d4/input.txt"));
-    d5::day5::run(read_lines("src/d5/input.txt"));
-    d6::day6::run(read_lines("src/d6/input.txt"));
-    d7::day7::run(read_lines("src/d7/input.txt"));
-    d8::day8::run(read_lines("src/d8/input.txt"));
-    d9::day9::run(read_lines("src/d9/input.txt"));
-    d10::day10::run(read_lines("src/d10/input.txt"));
+    d1::run(read_lines("src/d1/input.txt"));
+    d2::run(read_lines("src/d2/input.txt"));
+    d3::run(read_lines("src/d3/input.txt"));
+    d4::run(read_lines("src/d4/input.txt"));
+    d5::run(read_lines("src/d5/input.txt"));
+    d6::run(read_lines("src/d6/input.txt"));
+    d7::run(read_lines("src/d7/input.txt"));
+    d8::run(read_lines("src/d8/input.txt"));
+    d9::run(read_lines("src/d9/input.txt"));
+    d10::run(read_lines("src/d10/input.txt"));
 }
