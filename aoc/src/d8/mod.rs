@@ -8,6 +8,7 @@ pub mod day8 {
 
         let mut antennas: HashMap<char, Vec<[usize; 2]>> = Default::default();
         let mut anitnodes: Vec<[i32; 2]> = Default::default();
+        let mut p2_anitnodes: Vec<[i32; 2]> = Default::default();
         let mut char_map: Vec<Vec<char>> = lines.iter().map(|l| l.chars().collect()).collect();
 
         for y in 0..lines.len() {
@@ -70,59 +71,67 @@ pub mod day8 {
                         println!("Antinode position already found, {:?}", an_pos);
                     }
                 }
-                // //p2
-                // anitnodes = vec![];
-                // let mut n = 1;
-                // loop {
-                //     let an_pos = [
-                //         t2_pos[0] as i32 + diff_vec[0] * n,
-                //         t2_pos[1] as i32 + diff_vec[1] * n,
-                //     ];
-                //     let an_neg = [
-                //         t1_pos[0] as i32 - diff_vec[0] * n,
-                //         t1_pos[1] as i32 - diff_vec[1] * n,
-                //     ];
-                //     let an_pair = [an_pos, an_neg];
-                //     let valid_an: Vec<_> = an_pair
-                //         .iter()
-                //         .filter(|an| {
-                //             if an[0] < 0 || an[0] >= lines.len() as i32 {
-                //                 //an1_y out of range
-                //                 return false;
-                //             }
-                //             if an[1] < 0 || an[1] >= lines[0].len() as i32 {
-                //                 //an1_x out of range
-                //                 return false;
-                //             }
-                //             return true;
-                //         })
-                //         .collect();
+                //p2
+                let mut n = 0;
+                loop {
+                    let an_pos = [
+                        t2_pos[0] as i32 + diff_vec[0] * n,
+                        t2_pos[1] as i32 + diff_vec[1] * n,
+                    ];
+                    let an_neg = [
+                        t1_pos[0] as i32 - diff_vec[0] * n,
+                        t1_pos[1] as i32 - diff_vec[1] * n,
+                    ];
+                    let an_pair = [an_pos, an_neg];
+                    let valid_an: Vec<_> = an_pair
+                        .iter()
+                        .filter(|an| {
+                            if an[0] < 0 || an[0] >= lines.len() as i32 {
+                                //an1_y out of range
+                                return false;
+                            }
+                            if an[1] < 0 || an[1] >= lines[0].len() as i32 {
+                                //an1_x out of range
+                                return false;
+                            }
+                            return true;
+                        })
+                        .collect();
 
-                //     if valid_an.is_empty() {
-                //         break;
-                //     } else {
-                //         // for p in valid_an.iter().clone() {
-                //         //     char_map[p[0] as usize][p[1] as usize] = '#';
-                //         // }
-                //         for p in valid_an.iter().clone() {
-                //             if !anitnodes.contains(p) {
-                //                 anitnodes.push(**p);
-                //                 p2_result += 1;
-                //             } else {
-                //                 //non unique location
-                //                 continue;
-                //             }
-                //         }
-                //     }
-                //     n += 1;
-                // }
+                    if valid_an.is_empty() {
+                        break;
+                    } else {
+                        for p in valid_an.iter().clone() {
+                            char_map[p[0] as usize][p[1] as usize] = '#';
+                        }
+                        for p in valid_an.iter().clone() {
+                            if !p2_anitnodes.contains(p) {
+                                p2_anitnodes.push(**p);
+                                p2_result += 1;
+                            } else {
+                                //non unique location
+                                continue;
+                            }
+                        }
+                    }
+                    n += 1;
+                }
             }
         }
-        for row in char_map {
+        for row in char_map.iter_mut() {
             println!("{:?}", row);
         }
+
+        let p22_result = char_map
+            .clone()
+            .iter()
+            .flatten()
+            .filter(|x| **x == '#')
+            .count() as u64;
+
         println!("Day 8, Part 1. result= {}", result);
         println!("Day 8, Part 2. bad_result= {}", p2_result);
+        println!("Day 8, Part 2. count_result= {}", p22_result);
 
         println!("");
     }
