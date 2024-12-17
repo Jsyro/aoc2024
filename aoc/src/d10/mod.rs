@@ -1,4 +1,4 @@
-fn calculate_trailhead_value(map: &Vec<Vec<u8>>, pos: [usize; 2]) -> (u64, u64) {
+fn calculate_trailhead_values(map: &Vec<Vec<u8>>, pos: [usize; 2]) -> (u64, u64) {
     if map[pos[0]][pos[1]] != 0 {
         return (0, 0);
     } else {
@@ -7,12 +7,12 @@ fn calculate_trailhead_value(map: &Vec<Vec<u8>>, pos: [usize; 2]) -> (u64, u64) 
         p1_trailhead_value.sort();
         p1_trailhead_value.dedup();
 
-        println!(
-            "trailhead at {:?} has p1_value= {}, p2_value= {}",
-            pos,
-            p1_trailhead_value.len(),
-            p2_trailhead_value.len(),
-        );
+        // println!(
+        //     "trailhead at {:?} has p1_value= {}, p2_value= {}",
+        //     pos,
+        //     p1_trailhead_value.len(),
+        //     p2_trailhead_value.len(),
+        // );
         return (
             p1_trailhead_value.len() as u64,
             p2_trailhead_value.len() as u64,
@@ -63,7 +63,7 @@ pub fn run(lines: Vec<String>) {
 
     for y in 0..lines.len() {
         for x in 0..lines[y].len() {
-            let (p1_val, p2_val) = calculate_trailhead_value(char_map, [y, x]);
+            let (p1_val, p2_val) = calculate_trailhead_values(char_map, [y, x]);
 
             result += p1_val;
             _p2_result += p2_val;
