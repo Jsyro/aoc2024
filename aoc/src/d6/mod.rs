@@ -67,7 +67,7 @@ pub mod day6 {
         // }
 
         //final x is not being counted, just add 1
-        println!("Day 6, Part 1. bad_result= {}", result + 1);
+        println!("Day 6, Part 1. result= {}", result + 1);
         p2_result += -1;
         println!("Day 6, Part 2. bad_result= {}", p2_result);
 

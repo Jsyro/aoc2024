@@ -3,6 +3,8 @@ pub mod day7 {
 
     pub fn run(lines: Vec<String>) {
         let mut result: u64 = 0;
+
+        #[allow(unused_mut)]
         let mut p2_result: u64 = 0;
 
         for line in lines {
@@ -58,7 +60,7 @@ pub mod day7 {
             }
         }
 
-        println!("Day 7, Part 1. bad_result= {}", result);
+        println!("Day 7, Part 1. result= {}", result);
         println!("Day 7, Part 2. bad_result= {}", p2_result);
 
         println!("");

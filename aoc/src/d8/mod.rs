@@ -30,7 +30,7 @@ pub mod day8 {
 
         // println!("Antennas Found, {:?}", antennas);
 
-        for (signal, tower_pos_list) in antennas.iter().clone() {
+        for (_signal, tower_pos_list) in antennas.iter().clone() {
             for t in tower_pos_list.into_iter().combinations(2) {
                 let t1_pos: [usize; 2] = *t[0];
                 let t2_pos: [usize; 2] = *t[1];
@@ -63,7 +63,7 @@ pub mod day8 {
                     }
 
                     if !anitnodes.contains(&an_pos) {
-                        // println!("New Antinode at {:?} with freq {}", an_pos, signal);
+                        // println!("New Antinode at {:?} with freq {}", an_pos, _signal);
                         anitnodes.push(an_pos);
                         result += 1;
                         char_map[an_pos[0] as usize][an_pos[1] as usize] = '#';

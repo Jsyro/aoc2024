@@ -1,6 +1,7 @@
 use std::env;
 use std::fs::read_to_string;
 mod d1;
+mod d10;
 mod d2;
 mod d3;
 mod d4;
@@ -35,4 +36,5 @@ fn main() {
     d7::day7::run(read_lines("src/d7/input.txt"));
     d8::day8::run(read_lines("src/d8/input.txt"));
     d9::day9::run(read_lines("src/d9/input.txt"));
+    d10::day10::run(read_lines("src/d10/input.txt"));
 }
