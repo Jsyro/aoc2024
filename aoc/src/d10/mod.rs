@@ -1,19 +1,24 @@
 pub mod day10 {
 
-    fn calculate_trailhead_value(map: &Vec<Vec<u8>>, pos: [usize; 2]) -> u64 {
+    fn calculate_trailhead_value(map: &Vec<Vec<u8>>, pos: [usize; 2]) -> (u64, u64) {
         if map[pos[0]][pos[1]] != 0 {
-            return 0;
+            return (0, 0);
         } else {
-            let mut trailhead_value = valid_next_steps(map, pos, 0);
-            trailhead_value.sort();
-            trailhead_value.dedup();
+            let mut p1_trailhead_value = valid_next_steps(map, pos, 0);
+            let p2_trailhead_value = p1_trailhead_value.clone();
+            p1_trailhead_value.sort();
+            p1_trailhead_value.dedup();
 
             println!(
-                "trailhead at {:?} has value= {}",
+                "trailhead at {:?} has p1_value= {}, p2_value= {}",
                 pos,
-                trailhead_value.len()
+                p1_trailhead_value.len(),
+                p2_trailhead_value.len(),
             );
-            return trailhead_value.len() as u64;
+            return (
+                p1_trailhead_value.len() as u64,
+                p2_trailhead_value.len() as u64,
+            );
         }
     }
 
@@ -57,16 +62,17 @@ pub mod day10 {
             .iter()
             .map(|l| l.chars().map(|c| c.to_digit(10).unwrap() as u8).collect())
             .collect();
-        // let mut trailheads: HashMap<[usize; 2], u8> = Default::default();
 
         for y in 0..lines.len() {
             for x in 0..lines[y].len() {
-                result += calculate_trailhead_value(char_map, [y, x]);
+                let (p1_val, p2_val) = calculate_trailhead_value(char_map, [y, x]);
+
+                result += p1_val;
+                _p2_result += p2_val;
             }
         }
-
-        println!("Day 10, Part 1. bad_result= {}", result);
-        println!("Day 10, Part 2. bad_result= {}", _p2_result);
+        println!("Day 10, Part 1. result= {}", result);
+        println!("Day 10, Part 2. result= {}", _p2_result);
         println!("");
     }
 }
