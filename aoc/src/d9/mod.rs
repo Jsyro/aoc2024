@@ -36,25 +36,22 @@ fn uncompress_disk_map(disk_map: &String) -> Vec<i64> {
 fn defrag(disk_data: &mut Vec<i64>) -> Vec<u64> {
     let mut defraged_data: Vec<u64> = vec![];
 
-    for i in 0..disk_data.len() - 1 {
-        if i >= disk_data.len() {
-            break;
-        }
-        let val = disk_data[i];
-        if val == -1 {
-            //find last data block and move here
-            let block_to_move = loop {
-                let x = disk_data.pop().unwrap();
-                if x != -1 {
-                    break x;
-                };
-            };
-            defraged_data.push(block_to_move as u64);
-        } else {
-            defraged_data.push(disk_data[i] as u64);
+    let mut front = 0;
+    let mut back = disk_data.len() - 1;
+    while front < back {
+        match (disk_data[front], disk_data[back]) {
+            (-1, -1) => back -= 1,
+            (-1, _) => {
+                defraged_data.push(disk_data[back] as u64);
+                back -= 1;
+                front += 1
+            }
+            _ => {
+                defraged_data.push(disk_data[front] as u64);
+                front += 1
+            }
         }
     }
-
     return defraged_data;
 }
 
