@@ -23,18 +23,10 @@ pub fn run(lines: Vec<String>) {
             if *stone == 0 {
                 new_stones.push(1);
             } else if stone.to_string().len() % 2 == 0 {
-                let mut digits = Vec::new();
-                let mut n = *stone;
-                while n > 0 {
-                    digits.push(n % 10);
-                    n /= 10;
-                }
-                digits.reverse();
-                let mid = digits.len() / 2;
-                let s1 = digits[..mid].iter().fold(0, |acc, &d| acc * 10 + d);
-                let s2 = digits[mid..].iter().fold(0, |acc, &d| acc * 10 + d);
-                new_stones.push(s1);
-                new_stones.push(s2);
+                let stone_str = (stone).to_string();
+                let (s1, s2) = stone_str.split_at(stone_str.len() / 2);
+                new_stones.push(u64::from_str_radix(s1, 10).unwrap());
+                new_stones.push(u64::from_str_radix(s2, 10).unwrap());
             } else {
                 let new_stone = *stone * 2024;
                 new_stones.push(new_stone);
