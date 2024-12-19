@@ -13,7 +13,7 @@ pub fn run(lines: Vec<String>) {
     for _generation in 1..=25 {
         let current_time = Instant::now();
         println!(
-            "total time to generation {:2}, {:10} stones - {:?}",
+            // "total time to generation {:2}, {:10} stones - {:?}",
             _generation,
             stones.len(),
             current_time.duration_since(start_time)

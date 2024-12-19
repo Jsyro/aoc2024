@@ -114,6 +114,6 @@ pub fn run(lines: Vec<String>) {
     }
 
     println!("Day 12, Part 1. result= {}", result);
-    println!("Day 12, Part 2. result= {}", _p2_result);
+    println!("Day 12, Part 2. bad_result= {}", _p2_result);
     println!("");
 }
