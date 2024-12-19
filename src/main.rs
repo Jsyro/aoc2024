@@ -4,6 +4,7 @@ mod d1;
 mod d10;
 mod d11;
 mod d12;
+mod d13;
 mod d2;
 mod d3;
 mod d4;
@@ -43,5 +44,6 @@ fn main() {
     d9::run(read_lines("src/d9/input.txt"));
     d10::run(read_lines("src/d10/input.txt"));
     d11::run(read_lines("src/d11/input.txt"));
-    d12::run(read_lines("src/d12/sample.txt"));
+    d12::run(read_lines("src/d12/input.txt"));
+    d13::run(read_lines("src/d13/input.txt"));
 }

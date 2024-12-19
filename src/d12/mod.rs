@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use crate::utils::point::Point;
 #[derive(Default, Debug)]
 struct Region {
-    pub plant_type: u8,
+    pub _plant_type: u8,
     pub area: usize,
     pub perimeter: usize,
 }
@@ -11,7 +11,7 @@ struct Region {
 impl Region {
     pub fn new(plant_type: u8, area: usize, perimeter: usize) -> Self {
         Self {
-            plant_type: plant_type,
+            _plant_type: plant_type,
             area,
             perimeter,
         }
