@@ -10,7 +10,7 @@ pub fn run(lines: Vec<String>) {
         .collect();
     let mut new_stones: Vec<u64> = Vec::with_capacity(10);
     let start_time = Instant::now();
-    for _generation in 0..40 {
+    for _generation in 1..=25 {
         let current_time = Instant::now();
         println!(
             "total time to generation {:2}, {:10} stones - {:?}",
