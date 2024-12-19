@@ -39,13 +39,13 @@ impl Add for Point {
     type Output = Self;
 
     fn add(self, rhs: Self) -> Self::Output {
-        Self::new(self.x + rhs.x, self.y + rhs.y)
+        Self::new(self.y + rhs.y, self.x + rhs.x)
     }
 }
 impl AddAssign for Point {
     fn add_assign(&mut self, rhs: Self) {
-        self.x += rhs.x;
         self.y += rhs.y;
+        self.x += rhs.x;
     }
 }
 
@@ -53,13 +53,13 @@ impl Sub for Point {
     type Output = Self;
 
     fn sub(self, rhs: Self) -> Self::Output {
-        Self::new(self.x - rhs.x, self.y - rhs.y)
+        Self::new(self.y - rhs.y, self.x - rhs.x)
     }
 }
 
 impl SubAssign for Point {
     fn sub_assign(&mut self, rhs: Self) {
-        self.x -= rhs.x;
         self.y -= rhs.y;
+        self.x -= rhs.x;
     }
 }

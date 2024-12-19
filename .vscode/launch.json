@@ -5,20 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Cargo launch",
             "type": "lldb",
             "request": "launch",
-            "name": "Cargo launch",
-            "cargo": {
-                "args": [
-                    "build",
-                    "--lib"
-                ]
-            },
-            "program": "${workspaceFolder}/target/debug/aoc",
+            "program": "${workspaceRoot}/target/debug/aoc",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceRoot}",
             "sourceLanguages": ["rust"]
-
         }
+
     ]
 }
