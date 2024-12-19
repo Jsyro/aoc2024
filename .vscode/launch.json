@@ -7,10 +7,18 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
-            "program": "${workspaceFolder}/aoc/target/debug/aoc",
+            "name": "Cargo launch",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--lib"
+                ]
+            },
+            "program": "${workspaceFolder}/target/debug/aoc",
             "args": [],
-            "cwd": "${workspaceFolder}/aoc"
+            "cwd": "${workspaceFolder}",
+            "sourceLanguages": ["rust"]
+
         }
     ]
 }

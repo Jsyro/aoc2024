@@ -13,6 +13,9 @@ mod d7;
 mod d8;
 mod d9;
 
+pub mod utils {
+    pub mod point;
+}
 fn main() {
     fn read_lines(filename: &str) -> Vec<String> {
         read_to_string(filename)
@@ -40,52 +43,5 @@ fn main() {
     d9::run(read_lines("src/d9/input.txt"));
     d10::run(read_lines("src/d10/input.txt"));
     d11::run(read_lines("src/d11/input.txt"));
-    d12::run(read_lines("src/d12/input.txt"));
-}
-
-mod toolbox {
-    use std::ops::{Add, AddAssign, Sub, SubAssign};
-
-    #[derive(Clone, Copy, Default, Eq, PartialEq, PartialOrd, Ord, Hash)]
-    pub struct Point {
-        pub x: i32,
-        pub y: i32,
-    }
-
-    impl Point {
-        pub fn new(x: i32, y: i32) -> Self {
-            Self { x, y }
-        }
-
-        pub fn origin() -> Self {
-            Self::new(0, 0)
-        }
-
-        pub fn up() -> Self {
-            Self::new(0, -1)
-        }
-
-        pub fn down() -> Self {
-            Self::new(0, 1)
-        }
-
-        pub fn left() -> Self {
-            Self::new(-1, 0)
-        }
-
-        pub fn right() -> Self {
-            Self::new(1, 0)
-        }
-
-        pub fn orthogonal() -> impl Iterator<Item = Self> {
-            return vec![Self::up(), Self::down(), Self::left(), Self::right()].into_iter();
-        }
-    }
-    impl Add for Point {
-        type Output = Self;
-
-        fn add(self, rhs: Self) -> Self::Output {
-            Self::new(self.x + rhs.x, self.y + rhs.y)
-        }
-    }
+    d12::run(read_lines("src/d12/sample.txt"));
 }
