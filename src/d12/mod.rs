@@ -96,7 +96,7 @@ pub fn run(lines: Vec<String>) {
         .enumerate()
     {
         for (x, plant) in row.into_iter().enumerate() {
-            let point = Point::new(y as i32, x as i32);
+            let point = Point::new(y as isize, x as isize);
             // println!("next top level iteration at {:?}, {:?}", point, plant);
 
             if visited.contains(&point) {

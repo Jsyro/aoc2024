@@ -2,12 +2,12 @@ use std::ops::{Add, AddAssign, Sub, SubAssign};
 
 #[derive(Clone, Copy, Default, Eq, PartialEq, PartialOrd, Ord, Hash, Debug)]
 pub struct Point {
-    pub y: i32,
-    pub x: i32,
+    pub y: isize,
+    pub x: isize,
 }
 
 impl Point {
-    pub fn new(y: i32, x: i32) -> Self {
+    pub fn new(y: isize, x: isize) -> Self {
         Self { y, x }
     }
 

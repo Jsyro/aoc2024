@@ -9,3 +9,4 @@ regex = "1.11.1"
 
 [profile.dev]
 opt-level = 1
+incremental = true
