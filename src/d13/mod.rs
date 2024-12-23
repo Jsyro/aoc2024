@@ -1,101 +1,134 @@
 use crate::utils::point::Point;
+use std::collections::HashSet;
 
-#[derive(Default, Debug)]
+use std::cmp::{max, min};
+#[derive(Default, Debug, PartialEq)]
 struct Button {
     y: usize,
     x: usize,
-    cost: usize,
+    cost: isize,
 }
 impl Button {
-    pub fn new(y: usize, x: usize, cost: usize) -> Self {
-        Self { y, x, cost }
+    // pub fn new(y: usize, x: usize, cost: usize) -> Self {
+    //     Self { y, x, cost }
+    // }
+
+    fn distance(&self) -> usize {
+        return self.x + self.y;
     }
 
     fn weighted_distance(&self) -> f32 {
         return (self.x + self.y) as f32 / self.cost as f32;
     }
-    fn direction(&self) -> f32 {
-        return (self.y / self.x) as f32;
-    }
-    fn press(&self, loc: &mut Point, total_cost: &mut usize) {
-        *total_cost += self.cost;
+
+    fn press(&self, loc: &mut Point, total_cost: &mut isize, num_presses: isize) {
+        *total_cost += self.cost * num_presses;
         *loc += Point {
-            x: self.x as isize,
-            y: self.y as isize,
+            x: self.x as isize * num_presses,
+            y: self.y as isize * num_presses,
         };
+        // println!(
+        //     "pressing button {} times to move: {:?}",
+        //     num_presses,
+        //     [self.y as isize * num_presses, self.x as isize * num_presses]
+        // );
     }
 
-    fn unpress(&self, loc: &mut Point, total_cost: &mut usize) {
-        *total_cost -= self.cost;
-        *loc -= Point {
-            x: self.x as isize,
-            y: self.y as isize,
-        };
-    }
+    // fn unpress(&self, loc: &mut Point, total_cost: &mut usize, num_presses: isize) {
+    //     *total_cost -= self.cost * num_presses as usize;
+    //     *loc -= Point {
+    //         x: self.x as isize * num_presses,
+    //         y: self.y as isize * num_presses,
+    //     };
+    // }
 }
 
-fn find_optimal_path(a: &Button, b: &Button, prize_loc: Point) -> usize {
-    let mut total_cost: usize = 0;
-    let mut curr_loc: Point = Point { x: 0, y: 0 };
+fn find_optimal_path(a: &Button, b: &Button, prize_loc: Point) -> isize {
+    let mut total_cost: isize = 0;
+    let mut curr_loc = Point { x: 0, y: 0 };
 
-    let (better_button, lesser_button) = if a.weighted_distance() < b.weighted_distance() {
-        (a, b)
+    let ordered_buttons = if a.weighted_distance() > b.weighted_distance() {
+        [a, b]
     } else {
-        (b, a)
+        [b, a]
     };
-    // println!(
-    //     "The better button for total distance is: {:?}",
-    //     *better_button
-    // );
 
-    let mut max_num_presses_before_oob: usize = 0;
-    loop {
-        let num_y = prize_loc.y as usize / better_button.y;
-        let num_x = prize_loc.x as usize / better_button.x;
+    let steps_y = prize_loc.y as usize / ordered_buttons[0].y;
+    let steps_x = prize_loc.x as usize / ordered_buttons[0].x;
+    let num_better_presses = min(steps_x, steps_y);
+    ordered_buttons[0].press(&mut curr_loc, &mut total_cost, num_better_presses as isize);
 
-        let num_presses = min(num_y, num_x);
+    let mut offset = prize_loc.difference(&curr_loc);
 
-        curr_loc = Point {
-            x: (num_presses * better_button.x) as isize,
-            y: (num_presses * better_button.y) as isize,
-        };
-        total_cost += num_presses * better_button.cost;
+    let mut num_presses: isize = 0;
+    let mut offset_sum: isize = 0;
+    println!(
+        "{:6} presses to intitial interect offset: {:?}",
+        num_better_presses, offset
+    );
 
-        better_button.press(&mut curr_loc, &mut total_cost);
-    }
+    // two cases, better button is X bias or Y bias
+    // X-bias:
 
-    loop {
-        // println!("current_location: {:?}", curr_loc);
-        if curr_loc.x == 0 && curr_loc.y == 0 {
-            return 0; // no possible solution.
+    // step 0: x_offset is small, y_offset is positive.
+    // step 1: x_offset is negative, y_offset is small.
+    // step 2: x_offset is small, y_offset is positive.
+
+    // Y-bias:
+
+    // step 0: x_offset is large, y_offset is small
+    // step 1: x_offset is small, y_offset is large negative.
+    let mut buttons = [ordered_buttons[0], ordered_buttons[1]];
+    let mut button = ordered_buttons[0];
+    let mut y_bias: bool = offset[0] < offset[1];
+    let mut visited: HashSet<Point> = HashSet::new();
+
+    println!("y_bias: {:?}", y_bias);
+    while offset.iter().any(|o| *o != 0) {
+        //rotate
+        visited.insert(curr_loc);
+
+        buttons.rotate_left(1);
+        button = buttons[0];
+        let b_arr = [button.y, button.x];
+        let fnum_presses: f32 = offset[y_bias as usize] as f32 / b_arr[y_bias as usize] as f32;
+        num_presses = offset[y_bias as usize] / b_arr[y_bias as usize] as isize;
+
+        // should never have 0 presses. if fractional, round up
+        if num_presses as f32 != fnum_presses {
+            if fnum_presses < 0.0 {
+                num_presses -= 1;
+            } else if fnum_presses > 0.0 && fnum_presses < 1.0 {
+                num_presses = 1;
+            }
         }
-        better_button.unpress(&mut curr_loc, &mut total_cost);
-        let missing_y: usize = prize_loc.y as usize - curr_loc.y as usize;
-        let missing_x: usize = prize_loc.x as usize - curr_loc.x as usize;
 
-        if missing_y % lesser_button.y != 0 || missing_x % lesser_button.x != 0 {
-            //unpress again
-            continue;
+        button.press(&mut curr_loc, &mut total_cost, num_presses);
+        offset = prize_loc.difference(&curr_loc);
+        // println!(
+        //     "{:6} of {:?} presses to new offset: {:?}",
+        //     num_presses, button, offset
+        // );
+        if offset.iter().all(|o| *o == 0) {
+            break;
         }
 
-        if missing_y / lesser_button.y != missing_x / lesser_button.x {
-            // both divisible, but not equal, continue unpressing
-            continue;
+        offset_sum = offset[0].abs() + offset[1].abs();
+        if offset_sum > 30000000000000 || visited.contains(&curr_loc) {
+            // if we can't reach the prize, or are at a location we have arleady been too we're done
+            return 0; // impossible
+        } else {
+            visited.insert(curr_loc);
         }
-
-        while curr_loc.x != prize_loc.x || curr_loc.y != prize_loc.y {
-            //spam lesser button ()
-            lesser_button.press(&mut curr_loc, &mut total_cost);
-        }
-        break;
+        y_bias = !y_bias
     }
 
     println!("total_cost: {:?}", total_cost);
-    //TODO
+
     total_cost
 }
 
-fn parse_button(line: &str, cost: usize) -> Button {
+fn parse_button(line: &str, cost: isize) -> Button {
     let y_str = line.split(" ").collect::<Vec<&str>>()[3]
         .split("+")
         .collect::<Vec<&str>>()[1];
@@ -134,20 +167,20 @@ pub fn run(lines: Vec<String>) {
                 .collect::<Vec<&str>>()[1]
                 .split(",")
                 .collect::<Vec<&str>>()[0];
-            let mut prize_loc = Point {
+            let prize_loc = Point {
                 y: y_str.parse::<isize>().unwrap(),
                 x: x_str.parse::<isize>().unwrap(),
             };
-            let mut p2_prize_loc = Point {
+            let p2_prize_loc = Point {
                 y: 10000000000000 + y_str.parse::<isize>().unwrap(),
                 x: 10000000000000 + x_str.parse::<isize>().unwrap(),
             };
 
             println!("P1 Prize Location: {:?}", prize_loc);
             // then execute
-            result += find_optimal_path(&a, &b, prize_loc);
+            result += find_optimal_path(&a, &b, prize_loc) as usize;
             println!("P2 Prize Location: {:?}", p2_prize_loc);
-            _p2_result += find_optimal_path(&a, &b, p2_prize_loc);
+            _p2_result += find_optimal_path(&a, &b, p2_prize_loc) as usize;
 
             a = Default::default();
             b = Default::default();

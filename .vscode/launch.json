@@ -8,7 +8,7 @@
             "name": "Cargo launch",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/target/debug/aoc",
+            "program": "${workspaceRoot}/target/debug/aoc2024",
             "args": [],
             "cwd": "${workspaceRoot}",
             "sourceLanguages": ["rust"]

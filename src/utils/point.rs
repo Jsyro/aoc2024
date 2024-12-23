@@ -34,6 +34,10 @@ impl Point {
     pub fn orthogonal() -> impl Iterator<Item = Self> {
         return vec![Self::up(), Self::down(), Self::left(), Self::right()].into_iter();
     }
+
+    pub fn difference(&self, loc: &Point) -> [isize; 2] {
+        return [(self.y as isize - loc.y), (self.x as isize - loc.x)];
+    }
 }
 impl Add for Point {
     type Output = Self;

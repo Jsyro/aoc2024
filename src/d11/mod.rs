@@ -9,14 +9,14 @@ pub fn run(lines: Vec<String>) {
         .map(|x| x.parse::<u64>().unwrap())
         .collect();
     let mut new_stones: Vec<u64> = Vec::with_capacity(10);
-    let start_time = Instant::now();
+    let _start_time = Instant::now();
     for _generation in 1..=25 {
-        let current_time = Instant::now();
+        let _current_time = Instant::now();
         // println!(
         //     "total time to generation {:2}, {:10} stones - {:?}",
         //     _generation,
         //     stones.len(),
-        //     current_time.duration_since(start_time)
+        //     _current_time.duration_since(_start_time)
         // );
         new_stones.clear();
         for stone in stones.iter() {
