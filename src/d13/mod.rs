@@ -62,10 +62,10 @@ fn find_optimal_path(a: &Button, b: &Button, prize_loc: Point) -> isize {
 
     let mut num_presses: isize = 0;
     let mut offset_sum: isize = 0;
-    println!(
-        "{:6} presses to intitial interect offset: {:?}",
-        num_better_presses, offset
-    );
+    // println!(
+    //     "{:6} presses to intitial interect offset: {:?}",
+    //     num_better_presses, offset
+    // );
 
     // two cases, better button is X bias or Y bias
     // X-bias:
@@ -83,7 +83,7 @@ fn find_optimal_path(a: &Button, b: &Button, prize_loc: Point) -> isize {
     let mut y_bias: bool = offset[0] < offset[1];
     let mut visited: HashSet<Point> = HashSet::new();
 
-    println!("y_bias: {:?}", y_bias);
+    // println!("y_bias: {:?}", y_bias);
     while offset.iter().any(|o| *o != 0) {
         //rotate
         visited.insert(curr_loc);
@@ -123,7 +123,7 @@ fn find_optimal_path(a: &Button, b: &Button, prize_loc: Point) -> isize {
         y_bias = !y_bias
     }
 
-    println!("total_cost: {:?}", total_cost);
+    // println!("total_cost: {:?}", total_cost);
 
     total_cost
 }
@@ -176,10 +176,10 @@ pub fn run(lines: Vec<String>) {
                 x: 10000000000000 + x_str.parse::<isize>().unwrap(),
             };
 
-            println!("P1 Prize Location: {:?}", prize_loc);
+            // println!("P1 Prize Location: {:?}", prize_loc);
             // then execute
             result += find_optimal_path(&a, &b, prize_loc) as usize;
-            println!("P2 Prize Location: {:?}", p2_prize_loc);
+            // println!("P2 Prize Location: {:?}", p2_prize_loc);
             _p2_result += find_optimal_path(&a, &b, p2_prize_loc) as usize;
 
             a = Default::default();
